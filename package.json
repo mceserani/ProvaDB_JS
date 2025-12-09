@@ -1,0 +1,16 @@
+{
+  "name": "provadb_js",
+  "version": "1.0.0",
+  "main": "GestioneStudenti.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "dependencies": {
+    "inquirer": "^8.2.6",
+    "sqlite3": "^5.1.7"
+  }
+}
