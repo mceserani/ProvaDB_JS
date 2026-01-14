@@ -153,7 +153,52 @@ async function VisualizzaStudenti(db) {
 }
 
 async function AggiungiStudente(db) {
-    // Implementa qui
+    // Domande da porre all'utente
+    const questions = [
+        {
+            type: "input",
+            name: "name",
+            message: "Inserisci il nome dello studente",
+            validate: (answer) => {
+                if( !answer || answer.length === 0 )
+                    return "Inserisci il nome dello studente";
+                return true;
+            }
+        },
+        {
+            type: "input",
+            name: "matricola",
+            message: "Inserisci matricola dello studente",
+            validate: (answer) => {
+                if( !answer || answer.length === 0 )
+                    return "Inserisci il nome dello studente";
+                return true;
+            }
+        },
+        {
+            type: "input",
+            name: "dataN",
+            message: "Inserisci data di nascita (yyyy-mm-dd)",
+            validate: (answer) => {
+                if( !answer || answer.length === 0 )
+                    return "Inserisci il nome dello studente";
+                return true;
+            }
+        },
+    ];
+
+    const answers = await inquirer.prompt(questions);
+
+    const res = await new Promise((resolve,reject) => {
+        db.run("INSERT INTO Studente(Matricola, Nome, Data_N) VALUES (?,?,?)",[answers.matricola,answers.nome,answers.dataN],(err) => {
+              if (err)
+                reject("Errore durante l'inserimento");
+              else
+                resolve("Inserimento effettuato correttamente");
+        });
+    });
+
+    console.log(res);
 }
 
 async function EliminaStudente(db) {
