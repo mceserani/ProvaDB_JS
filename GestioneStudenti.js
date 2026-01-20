@@ -202,7 +202,33 @@ async function AggiungiStudente(db) {
 }
 
 async function EliminaStudente(db) {
-    // Implementa qui
+    
+    // Domanda da porre all'utente
+    const question = [
+        {
+            type: "input",
+            name: "matricola",
+            message: "Inserisci la matricola dello studente da eliminare",
+            validate: (answer) => {
+                if( !answer || answer.length === 0 )
+                    return "Inserisci la matricola dello studente da eliminare";
+                return true;
+            }
+        },
+    ];
+
+    const answer = await inquirer.prompt(question);
+
+    const res = await new Promise((resolve,reject) => {
+        db.run("DELETE FROM Studente WHERE Matricola = ?",[answer.matricola],(err) => {
+                if (err)
+                    reject("Errore durante l'eliminazione");
+                else
+                    resolve("Eliminazione effettuata correttamente");
+        });
+    });
+
+    console.log(res);
 }
 
 async function AggiornaStudente(db) {
